@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregunta Especial</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffeef8;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 3rem;
+            margin-bottom: 30px;
+        }
+
+        .container-botones {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #btn-si {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        #btn-no {
+            background-color: #f44336;
+            color: white;
+        }
+
+        /* Estilo para cuando ya dijo que sí */
+        .celebracion {
+            display: none;
+            text-align: center;
+        }
+
+        .celebracion h2 {
+            color: #d63384;
+            font-size: 2.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="pantalla-pregunta">
+        <h1>¿Me quieres?</h1>
+        <div class="container-botones">
+            <button id="btn-si">SÍ</button>
+            <button id="btn-no">NO</button>
+        </div>
+    </div>
+
+    <div id="celebracion" class="celebracion">
+        <h2>¡Sabía que dirías que sí mi chocolatico! 🤍🍫</h2>
+        <p style="font-size: 5rem;">🥰</p>
+    </div>
+
+    <script>
+        const btnSi = document.getElementById('btn-si');
+        const btnNo = document.getElementById('btn-no');
+        const pantallaPregunta = document.getElementById('pantalla-pregunta');
+        const celebracion = document.getElementById('celebracion');
+
+        let escalaSi = 1;
+        let escalaNo = 1;
+
+        btnNo.addEventListener('click', () => {
+            // Aumentar el tamaño del botón SÍ
+            escalaSi += 0.4;
+            btnSi.style.transform = `scale(${escalaSi})`;
+
+            // Disminuir el tamaño del botón NO
+            escalaNo -= 0.15;
+            if (escalaNo < 0.3) escalaNo = 0.3; // Evitar que desaparezca del todo
+            btnNo.style.transform = `scale(${escalaNo})`;
+            
+            // Opcional: mover el botón NO un poco para que sea más difícil darle click
+            const x = Math.random() * 50 - 25;
+            const y = Math.random() * 50 - 25;
+            btnNo.style.translate = `${x}px ${y}px`;
+        });
+
+        btnSi.addEventListener('click', () => {
+            pantallaPregunta.style.display = 'none';
+            celebracion.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
